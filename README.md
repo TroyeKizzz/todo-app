@@ -33,3 +33,7 @@ For this work the goal is to program a "RG (random generated) TODO app". In shor
 [+ [0.1.0] +]
  - Frontend is initialized and is running on localhost:3000
  - Backend is initialized and is running on localhost:5000
+
+[- [0.2.0] -]
+ - Frontend is running in Docker and is accessible on localhost:3000
+ - Backend is running in Docker and is accessible on localhost:5000
