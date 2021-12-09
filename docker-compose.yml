@@ -1,5 +1,15 @@
 version: '2.3'
 services: 
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/opt/app
+    environment: 
+      CI: 'true'
+    restart: always
   backend:
     build:
       context: ./backend
