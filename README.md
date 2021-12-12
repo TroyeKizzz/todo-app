@@ -41,3 +41,8 @@ For this work the goal is to program a "RG (random generated) TODO app". In shor
 [+ [0.3.0] +]
  - Frontend is running in CI Docker and is accessible on http://21wsp4pw.course.tamk.cloud
  - Backend is running in CI Docker and is accessible on http://21wsp4pw.course.tamk.cloud/api
+
+[- [0.4.0] -]
+- Backend returns single random generated todo-task from http://21wsp4pw.course.tamk.cloud/api/v1/task/random endpoint.
+- Frontend lists 3 random tasks in a todo-list UI. Each item in the list has a text field that describes the task, and a checkbox to mark the item done.
+- User can add, delete and mark tasks done.
