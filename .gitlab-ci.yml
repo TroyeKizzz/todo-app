@@ -1,6 +1,7 @@
 variables:
   REMOTE_HOST: deploy@21wsp4
   WEBAPP_IMAGE: ${CI_REGISTRY_IMAGE}/frontend
+  API_IMAGE: ${CI_REGISTRY_IMAGE}/backend
 
 stages:
   - test
@@ -19,6 +20,11 @@ test:
     - rm package-lock.json
     # Run npm commands
     - npm install && npm test #&& npm audit
+    # Go to backend directory
+    - cd ../backend
+    # Run npm commands
+    - npm install && npm test #&& npm audit
+
 
 build:
   image: docker:latest
@@ -30,6 +36,10 @@ build:
     # Build & push frontend
     - docker build -f frontend/DockerfileServer -t "${WEBAPP_IMAGE}" .
     - docker push "${WEBAPP_IMAGE}"
+    # Build & push backend
+    - docker build -f api/DockerfileServer -t "${API_IMAGE}" .
+    - docker push "${API_IMAGE}"
+
 
 deploy:
   image: alpine:latest
@@ -42,7 +52,7 @@ deploy:
     # Prepare files for transfer
     - mkdir remote_dir_pw
     - cp docker-compose.server.yml remote_dir_pw/docker-compose.yml
-    # - echo "API_IMAGE=${API_IMAGE}" >> remote_dir_pw/.env
+    - echo "API_IMAGE=${API_IMAGE}" >> remote_dir_pw/.env
     - echo "WEBAPP_IMAGE=${WEBAPP_IMAGE}" >> remote_dir_pw/.env
     # Transfer to server
     - rsync -r remote_dir_pw "${REMOTE_HOST}:./"
