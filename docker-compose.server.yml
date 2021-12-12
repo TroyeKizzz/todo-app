@@ -1,0 +1,9 @@
+version: '2.4'
+services: 
+  webapp: 
+    image: ${WEBAPP_IMAGE}
+    ports: 
+      - '8080:3000'
+    env_file:
+      - .env
+    restart: always
