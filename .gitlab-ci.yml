@@ -37,7 +37,7 @@ build:
     - docker build -f frontend/DockerfileServer -t "${WEBAPP_IMAGE}" .
     - docker push "${WEBAPP_IMAGE}"
     # Build & push backend
-    - docker build -f api/DockerfileServer -t "${API_IMAGE}" .
+    - docker build -f backend/DockerfileServer -t "${API_IMAGE}" .
     - docker push "${API_IMAGE}"
 
 
