@@ -21,6 +21,12 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/task/random', (req, res) => {
+  res.json({
+    message: 'some random task'
+  });
+});
+
 app.use('/api/v1', api);
 
 app.use(middlewares.notFound);
