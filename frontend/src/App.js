@@ -3,16 +3,35 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    tasks: ['Task 1', 'Task 2', 'Task 3'],
+    tasks: [
+      {
+        'index': 'Task 1',
+        'complete': false
+      },
+      {
+        'index': 'Task 2',
+        'complete': false
+      },
+      {
+        'index': 'Task 3',
+        'complete': false
+      },
+    ],
   };
 
   handleSubmit = task => {
-    this.setState({tasks: [...this.state.tasks, task]});
+    this.setState({tasks: [...this.state.tasks, {index: task, isDone: false}]});
   }
   
   handleDelete = (index) => {
     const newArr = [...this.state.tasks];
     newArr.splice(index, 1);
+    this.setState({tasks: newArr});
+  }
+
+  handleToggle = (index) => {
+    const newArr = [...this.state.tasks];
+    newArr[index]['complete'] = !newArr[index]['complete'];
     this.setState({tasks: newArr});
   }
 
@@ -23,7 +42,7 @@ class App extends React.Component {
           <h1 className="antialiased text-grey-darkest mb-4 font-semibold text-xl">Todo List</h1>
           <Header numTodos={this.state.tasks.length} />
           <SubmitForm onFormSubmit={this.handleSubmit} />
-          <TodoList tasks={this.state.tasks} onDelete={this.handleDelete} />
+          <TodoList tasks={this.state.tasks} isDone={this.handleToggle} onDelete={this.handleDelete} />
         </div>
       </div>
     );
@@ -52,7 +71,7 @@ class SubmitForm extends React.Component {
           onChange={(e) => this.setState({term: e.target.value})}
           className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 mb-4 text-grey-darker"
         />
-        <button className='flex-no-shrink p-2 border-2 rounded text-green-500 mb-4 border-green-500 hover:text-white hover:bg-green-500'>Submit</button>
+        <button className='flex-no-shrink p-2 border-2 rounded text-purple-400 mb-4 border-purple-400 hover:text-white hover:bg-purple-400'>Submit</button>
       </form>
     );
   }
@@ -72,7 +91,7 @@ const Header = (props) => {
 
 const TodoList = (props) => {
   const todos = props.tasks.map((todo, index) => {
-    return <Todo content={todo} key={index} id={index} onDelete={props.onDelete} />
+    return <Todo content={todo.index} todo={todo} key={index} id={index} isDone={props.isDone} onDelete={props.onDelete} />
   })
   return( 
     <div className='list-wrapper'>
@@ -84,7 +103,8 @@ const TodoList = (props) => {
 const Todo = (props) => {
   return(
     <div className="flex mb-4 items-center">
-      <p className="antialiased w-full text-grey-darkest text-base font-normal">{props.content}</p>
+      <p className={props.todo.complete? "line-through text-green-400 antialiased w-full text-base font-normal":"text-grey-800 antialiased w-full text-base font-normal"}>{props.content}</p>
+      <button className={props.todo.complete? "flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-gray-300 border-gray-300 hover:bg-gray-300":"flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green-400 border-green-400 hover:bg-green-400"}  onClick={() => {props.isDone(props.id)}}>{props.todo.complete? "Undo":"Done"}</button>
       <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-400 border-red-400 hover:text-white hover:bg-red-400" onClick={() => {props.onDelete(props.id)}}>Remove</button>
     </div>
   );
