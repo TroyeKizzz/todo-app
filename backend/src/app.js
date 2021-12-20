@@ -26,8 +26,7 @@ app.get('/', (req, res) => {
 
 app.get('/task/random', (req, res) => {
   output = "";
-  random_number = Math.floor(Math.random() * 7);
-  switch(random_number) {
+  switch(Math.floor(Math.random() * 7)) {
     case 0:
       // Buy {product} from {company}
       output = `Buy ${faker.commerce.productName()} from ${faker.company.companyName()}`;
