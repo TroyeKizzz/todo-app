@@ -3,21 +3,18 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    tasks: [
-      {
-        'index': 'Task 1',
-        'complete': false
-      },
-      {
-        'index': 'Task 2',
-        'complete': false
-      },
-      {
-        'index': 'Task 3',
-        'complete': false
-      },
-    ],
+    tasks: [],
   };
+
+  componentDidMount () {
+    Promise.all([
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});})
+    ])
+      
+  }
 
   handleSubmit = task => {
     this.setState({tasks: [...this.state.tasks, {index: task, isDone: false}]});
