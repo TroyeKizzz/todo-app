@@ -8,10 +8,10 @@ class App extends React.Component {
 
   componentDidMount () {
     Promise.all([
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});}),
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});}),
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});}),
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.messenge, isDone: false}]});})
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});})
     ])
       
   }
