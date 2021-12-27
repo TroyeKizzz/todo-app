@@ -36,7 +36,6 @@ class App extends React.Component {
     return(
       <div className='wrapper h-screen w-screen flex items-center justify-center bg-green-200 font-sans'>
         <div className='card frame bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg'>
-          <h1 className="antialiased text-grey-darkest mb-4 font-semibold text-xl">Todo List</h1>
           <Header numTodos={this.state.tasks.length} />
           <SubmitForm onFormSubmit={this.handleSubmit} />
           <TodoList tasks={this.state.tasks} isDone={this.handleToggle} onDelete={this.handleDelete} />
@@ -77,10 +76,18 @@ class SubmitForm extends React.Component {
 
 const Header = (props) => {
   return(
-    <div className='card-header'>
-      <h1 className='card-header-title header'>
-        You have {props.numTodos} Todos
-      </h1>
+    <div>
+      <div className='todo flex mb-4 items-center'>
+        <h1 className="antialiased w-full text-grey-darkest mb-4 font-semibold text-xl">Todo List</h1>
+        <button className={"antialiased flex-no-shrink p-1.5 ml-4 mr-2 border-2 rounded hover:text-white text-purple-400 border-purple-400 hover:bg-purple-400"}>Save</button>
+        <button className={"antialiased flex-no-shrink p-1.5 ml-4 mr-2 border-2 rounded hover:text-white text-purple-400 border-purple-400 hover:bg-purple-400"}>Load</button>
+        <button className={"antialiased flex-no-shrink p-1.5 ml-4 border-2 rounded hover:text-white text-purple-400 border-purple-400 hover:bg-purple-400"}>Update</button>
+      </div>
+      <div className='card-header'>
+        <h1 className='card-header-title header'>
+          You have {props.numTodos} Todos
+        </h1>
+      </div>
     </div>
   )
 }
