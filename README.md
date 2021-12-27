@@ -47,6 +47,6 @@ For this work the goal is to program a "RG (random generated) TODO app". In shor
 - Frontend lists 3 random tasks in a todo-list UI. Each item in the list has a text field that describes the task, and a checkbox to mark the item done.
 - User can add, delete and mark tasks done.
 
-[- [0.5.0] -]
+[+ [0.5.0] +]
  - Frontend has at least 3 custom tests that are passing both in localhost and pipeline.
  - Backend has at least 3 custom tests that are passing both in localhost and pipeline.

@@ -99,7 +99,7 @@ const TodoList = (props) => {
 
 const Todo = (props) => {
   return(
-    <div className="flex mb-4 items-center">
+    <div className="todo flex mb-4 items-center">
       <p className={props.todo.complete? "line-through text-green-400 antialiased w-full text-base font-normal":"text-grey-800 antialiased w-full text-base font-normal"}>{props.content}</p>
       <button className={props.todo.complete? "flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-gray-300 border-gray-300 hover:bg-gray-300":"flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green-400 border-green-400 hover:bg-green-400"}  onClick={() => {props.isDone(props.id)}}>{props.todo.complete? "Undo":"Done"}</button>
       <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-400 border-red-400 hover:text-white hover:bg-red-400" onClick={() => {props.onDelete(props.id)}}>Remove</button>
