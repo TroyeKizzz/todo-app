@@ -147,9 +147,9 @@ const Header = (props) => {
       <div className='todo flex mb-4 items-center'>
         <h1 className="antialiased w-full text-grey-darkest font-semibold text-xl">Todo List</h1>
         <button className={"transition-all antialiased flex-no-shrink p-1.5 mr-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"} onClick={() => {props.addRandom()}}>Random</button>
-        <button className={"transition-all antialiased flex-no-shrink p-1.5 mr-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"}onClick={() => {props.onSave()}}>Save</button>
-        <button className={"transition-all antialiased flex-no-shrink p-1.5 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"}>Load</button>
-        <button className={"transition-all antialiased flex-no-shrink p-1.5 ml-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"}>Update</button>
+        <button className={"transition-all antialiased flex-no-shrink p-1.5 mr-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"} onClick={() => {props.onSave()}}>Save</button>
+        <button className={"transition-all antialiased flex-no-shrink p-1.5 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"} onClick={() => {props.onLoad()}}>Load</button>
+        <button className={"transition-all antialiased flex-no-shrink p-1.5 ml-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"} onClick={() => {props.onUpdate()}}>Update</button>
       </div>
       <div className='card-header'>
         <h1 className='card-header-title header'>
