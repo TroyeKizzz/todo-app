@@ -102,7 +102,7 @@ class App extends React.Component {
   render() {
     return(
       <div className='wrapper h-screen w-screen flex items-center justify-center bg-green-200 font-sans'>
-        <div className='card frame bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 '>
+        <div className='card frame bg-white rounded shadow p-6 m-4 w-full lg:w-2/4 '>
           <Header numTodos={this.state.tasks.length} addRandom={this.handleRandom} onLoad={this.handleLoad} onUpdate={this.handleUpdate} onSave={this.handleSave}/>
           <SubmitForm onFormSubmit={this.handleSubmit} />
           <TodoList tasks={this.state.tasks} complete={this.handleToggle} onDelete={this.handleDelete} />
