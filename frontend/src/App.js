@@ -8,16 +8,21 @@ class App extends React.Component {
 
   componentDidMount () {
     Promise.all([
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
-      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {  this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});})
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});})
     ])
-      
   }
 
   handleSubmit = task => {
     this.setState({tasks: [...this.state.tasks, {index: task, isDone: false}]});
+  }
+
+  handleRandom = async() => {
+    await fetch(`/api/v1/task/random`)
+    .then((res) => res.json())
+    .then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, isDone: false}]});})
   }
   
   handleDelete = (index) => {
@@ -36,7 +41,7 @@ class App extends React.Component {
     return(
       <div className='wrapper h-screen w-screen flex items-center justify-center bg-green-200 font-sans'>
         <div className='card frame bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg'>
-          <Header numTodos={this.state.tasks.length} />
+          <Header numTodos={this.state.tasks.length} addRandom={this.handleRandom} />
           <SubmitForm onFormSubmit={this.handleSubmit} />
           <TodoList tasks={this.state.tasks} isDone={this.handleToggle} onDelete={this.handleDelete} />
         </div>
@@ -67,7 +72,7 @@ class SubmitForm extends React.Component {
           onChange={(e) => this.setState({term: e.target.value})}
           className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 mb-4 text-grey-darker"
         />
-        <button className='flex-no-shrink p-2 border-2 rounded text-purple-400 mb-4 border-purple-400 hover:text-white hover:bg-purple-400'>Submit</button>
+        <button className='flex-no-shrink p-2 border-2 rounded text-purple-500 mb-4 border-purple-500 hover:text-white hover:bg-purple-500'>Submit</button>
       </form>
     );
   }
@@ -79,9 +84,10 @@ const Header = (props) => {
     <div>
       <div className='todo flex mb-4 items-center'>
         <h1 className="antialiased w-full text-grey-darkest font-semibold text-xl">Todo List</h1>
-        <button className={"antialiased flex-no-shrink p-1.5 ml-4 mr-2 font-semibold border-0 rounded hover:text-white text-purple-400 border-purple-400 hover:bg-purple-400"}>Save</button>
-        <button className={"antialiased flex-no-shrink p-1.5 ml-4 mr-2 font-semibold border-0 rounded hover:text-white text-purple-400 border-purple-400 hover:bg-purple-400"}>Load</button>
-        <button className={"antialiased flex-no-shrink p-1.5 ml-4 font-semibold border-0 rounded hover:text-white text-purple-400 border-purple-400 hover:bg-purple-400"}>Update</button>
+        <button className={"antialiased flex-no-shrink p-1.5 mr-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"} onClick={() => {props.addRandom()}}>Random</button>
+        <button className={"antialiased flex-no-shrink p-1.5 mr-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"}>Save</button>
+        <button className={"antialiased flex-no-shrink p-1.5 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"}>Load</button>
+        <button className={"antialiased flex-no-shrink p-1.5 ml-2 font-semibold border-0 rounded hover:text-white text-purple-500 hover:bg-purple-500"}>Update</button>
       </div>
       <div className='card-header'>
         <h1 className='card-header-title header'>
