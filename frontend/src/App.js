@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   handleRandom = async() => {
-    await fetch(`http://21wsp4pw.course.tamk.cloud/api/v1/task/random`)
+    await fetch(`/api/v1/task/random`)
     .then((res) => res.json())
     .then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, complete: false, onCloud: false}]});})
   }
