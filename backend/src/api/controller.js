@@ -37,10 +37,49 @@ exports.create = (req, res) => {
 
 // Find a single Entry with an id
 exports.findOne = (req, res) => {
+    // id of list from request
+    const id = req.params.id;
 
+    // Find and respond with list
+    Entry.findById(id)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found list with id " + id });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving list with id=" + id });
+    });
 };
 
 // Update a Entry by the id in the request
 exports.update = (req, res) => {
+    // Validate request
+    if (!req.body.tasks) {
+        res.status(400).send({ message: "Content can not be empty!" });
+        return;
+    }
 
+    // id of list from request
+    const id = req.params.id;
+
+    // Find list by id and put new one in place of it
+    const new_entry = {
+        tasks: req.body.tasks
+    };
+    Entry.findByIdAndUpdate(id, new_entry, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update list with id=${id}. Maybe list was not found!`
+        });
+      } else res.send({ message: "List was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating list with id=" + id
+      });
+    });
 };
