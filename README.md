@@ -27,7 +27,7 @@ Example:
       "task": "go somewhere",
       "done": true
     },
-	{
+    {
       "task": "go somewhere else",
       "done": false
     }
