@@ -1,5 +1,5 @@
 const dbConfig = {
-    url: "mongodb://backend:27017/t04-todo"
+    url: "mongodb://mongodb:27017/t04-todo"
 };
 
 const mongoose = require("mongoose");
