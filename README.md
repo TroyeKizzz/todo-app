@@ -18,7 +18,12 @@ For this work the goal is to program a "RG (random generated) TODO app". In shor
 #### Backend
 [http://21wsp4pw.course.tamk.cloud/api](http://21wsp4pw.course.tamk.cloud/api)
 #### Database
+- Create a new to-do list
 POST [http://21wsp4pw.course.tamk.cloud/api/v1/task/list](http://21wsp4pw.course.tamk.cloud/api/v1/task/list)
+- Update an existing to-do list by its id
+PUT [http://21wsp4pw.course.tamk.cloud/api/v1/task/list/:id](http://21wsp4pw.course.tamk.cloud/api/v1/task/list/:id)
+- Find an existing to-do list by its id
+GET [http://21wsp4pw.course.tamk.cloud/api/v1/task/list/:id](http://21wsp4pw.course.tamk.cloud/api/v1/task/list/:id)
 Example:
 ```javacript
 {
