@@ -18,4 +18,11 @@ services:
     volumes:
       - ./backend:/opt/app
     restart: always
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    ports: 
+      - '27017:27017'
+
 

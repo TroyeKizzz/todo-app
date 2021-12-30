@@ -14,3 +14,9 @@ services:
     env_file:
       - .env
     restart: always
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    ports: 
+      - '27017:27017'
