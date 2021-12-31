@@ -72,3 +72,13 @@ Example:
 [+ [0.5.0] +]
  - Frontend has at least 3 custom tests that are passing both in localhost and pipeline.
  - Backend has at least 3 custom tests that are passing both in localhost and pipeline.
+
+[+ [0.6.0/1.0.0] +]
+- New backend endpoints:
+  - POST /api/v1/task/list:
+  - GET /api/v1/task/list/:id: Returns a list of tasks by ID number.
+  - PUT /api/v1/task/list/:id: Updates the list content.
+- Frontend functionality:
+  - "Save new" button to save the current TODO list using the backend.
+  - "Load" button that is used to load saved lists from the backend.
+  - "Update" button to overwrite existing list with what is currently active in the UI.
