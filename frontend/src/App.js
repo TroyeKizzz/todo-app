@@ -7,15 +7,17 @@ class App extends React.Component {
   state = {
     tasks: [],
   };
+  ID_History = {
+    list: [],
+  };
 
-  // componentDidMount () {
-  //   Promise.all([
-  //     fetch(`http://21wsp4pw.course.tamk.cloud/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: true}]});}),
-  //     fetch(`http://21wsp4pw.course.tamk.cloud/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: false}]});}),
-  //     fetch(`http://21wsp4pw.course.tamk.cloud/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: false}]});}),
-  //     fetch(`http://21wsp4pw.course.tamk.cloud/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: false}]});})
-  //   ])
-  // }
+  componentDidMount () {
+    Promise.all([
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: true}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: false}]});}),
+      fetch(`/api/v1/task/random`).then((res) => res.json()).then((json) => {this.setState({tasks: [...this.state.tasks, {index: json.message, done: false, onCloud: false}]});}),
+      ])
+  }
 
   handleSubmit = task => {
     this.setState({tasks: [...this.state.tasks, {task: task, done: false, onCloud: false}]});
@@ -38,6 +40,7 @@ class App extends React.Component {
     })
     .then((response) => response.json()).then (data => {
       toast.success(data);
+      this.ID_History.list.push({id: data})
       const newList = this.state.tasks.map(todo => {
         // if this task has the same ID as the edited task
         if (todo.onCloud === false) {
@@ -135,13 +138,18 @@ class App extends React.Component {
     return(
       <div className='wrapper h-screen w-screen flex items-center justify-center bg-green-200 font-sans'>
         <ToastContainer />
-        <div className='card frame bg-white rounded shadow p-6 m-4 w-full lg:w-2/4 '>
-          <Header numTodos={this.state.tasks.length} addRandom={this.handleRandom}  onSave={this.handleSave}/>
-          <SubmitForm onFormSubmit={this.handleSubmit} />
-          <TodoList tasks={this.state.tasks} done={this.handleToggle} onDelete={this.handleDelete} />
-          <div className='flex w-full'>
-            <UpdateForm onUpdate={this.handleUpdate}/>
-            <LoadForm onLoad={this.handleLoad}/>
+        <div className='flex w-3/5'>
+          <div className='card frame bg-white rounded shadow p-6 m-4 max-h-full w-full '>
+            <Header numTodos={this.state.tasks.length} addRandom={this.handleRandom}  onSave={this.handleSave}/>
+            <SubmitForm onFormSubmit={this.handleSubmit} />
+            <TodoList tasks={this.state.tasks} done={this.handleToggle} onDelete={this.handleDelete} />
+            <div className='flex w-full'>
+              <UpdateForm onUpdate={this.handleUpdate}/>
+              <LoadForm onLoad={this.handleLoad}/>
+            </div>
+          </div>
+          <div className='card frame bg-white rounded shadow p-6 m-4 max-h-max w-1/3'>
+            <History historyList={this.ID_History.list}/>
           </div>
         </div>
       </div>
@@ -193,6 +201,18 @@ const Header = (props) => {
       </div>
     </div>
   )
+}
+
+const History = (props) => {
+    const history = props.historyList.map(data => {
+      return <p className='transition-all text-grey-800 antialiased w-full text-base font-normal'> {"- "+data.id} </p>
+    })
+    return(
+      <div>
+        <h1 className="antialiased w-full text-grey-darkest font-semibold text-xl">History</h1>
+        {history}
+      </div>
+    );
 }
 
 class UpdateForm extends React.Component {
