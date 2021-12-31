@@ -1,6 +1,6 @@
 {
   "name": "todo-list-backend",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": " A basic starter for an express.js API",
   "main": "index.js",
   "scripts": {
